@@ -11,3 +11,4 @@ curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/do
 
 unzip dataset.zip
 rm dataset.zip
+wget https://github.com/Rajat-Roy/tissue_paper/releases/download/v1.0/mask_rcnn_tissue_0001.h5
