@@ -13,9 +13,8 @@ git clone https://github.com/Rajat-Roy/tissue_paper.git
 cd tissue_paper
 pip install -r requirements.txt
 wget https://github.com/Rajat-Roy/tissue_paper/releases/download/v1.0/mask_rcnn_car_damage_0030.h5
-wget https://github.com/Rajat-Roy/tissue_paper/releases/download/v1.0/dataset.zip
 ```
-Extract the dataset.zip archive
+Collect the wet tissue paper images.
 
 If jupyter notebook is not installed already:
 ```
