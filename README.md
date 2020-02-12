@@ -25,7 +25,7 @@ Start the notebook server:
 ```
 jupyter notebook
 ```
-In the jupyter app directory listing click and run the `tissue_paper_demo.ipynb` file.
+In the jupyter app directory listing click and run the `tissue_demo.ipynb` file.
 
 Change the file paths in the notebook accordingly.
 
