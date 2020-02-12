@@ -12,7 +12,7 @@ Open a terminal and execute the following lines:
 git clone https://github.com/Rajat-Roy/tissue_paper.git
 cd tissue_paper
 pip install -r requirements.txt
-wget https://github.com/Rajat-Roy/tissue_paper/releases/download/v1.0/mask_rcnn_car_damage_0030.h5
+wget https://github.com/Rajat-Roy/tissue_paper/releases/download/v1.0/mask_rcnn_tissue_0001.h5
 ```
 Collect the wet tissue paper images.
 
