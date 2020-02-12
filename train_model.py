@@ -12,19 +12,13 @@ Usage: import the module (see Jupyter notebooks for examples), or run from
        the command line as such:
 
     # Train a new model starting from pre-trained COCO weights
-    python3 balloon.py train --dataset=/path/to/balloon/dataset --weights=coco
+    python3 train_model.py train --dataset=/path/to/tissue/dataset --weights=coco
 
     # Resume training a model that you had trained earlier
-    python3 balloon.py train --dataset=/path/to/balloon/dataset --weights=last
+    python3 train_model.py train --dataset=/path/to/balloon/dataset --weights=last
 
     # Train a new model starting from ImageNet weights
-    python3 balloon.py train --dataset=/path/to/balloon/dataset --weights=imagenet
-
-    # Apply color splash to an image
-    python3 balloon.py splash --weights=/path/to/weights/file.h5 --image=<URL or path to file>
-
-    # Apply color splash to video using the last weights you trained
-    python3 balloon.py splash --weights=last --video=<URL or path to file>
+    python3 train_model.py train --dataset=/path/to/balloon/dataset --weights=imagenet
 """
 
 import os
@@ -171,7 +165,7 @@ class TissueDataset(utils.Dataset):
     def image_reference(self, image_id):
         """Return the path of the image."""
         info = self.image_info[image_id]
-        if info["source"] == "car_damage":
+        if info["source"] == "tissue_paper":
             return info["path"]
         else:
             super(self.__class__, self).image_reference(image_id)
@@ -306,48 +300,6 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
     print("Saved to ", file_name)
 
     
-    
-############################################################
-#  Inference
-############################################################
-def Inference(model, image):
-    class InferenceConfig(TissueConfig):
-        # Set batch size to 1 since we'll be running inference on
-        # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
-        GPU_COUNT = 1
-        IMAGES_PER_GPU = 1
-
-    config = InferenceConfig()
-    config.display()
-
-    # Create model
-    model = modellib.MaskRCNN(mode="inference", config=config,
-                                  model_dir=DEFAULT_LOGS_DIR)
-
-    weights_path = "../../logs/balloon20200201T1505/mask_rcnn_balloon_0030.h5"
-    image_path = "../../datasets/tissue/val/84.jpg"
-
-
-    # Load weights
-    model.load_weights(weights_path, by_name=True)
-
-    # Train or evaluate
-    # balloon.detect_and_color_splash(model, image_path,
-    #                             video_path="")
-
-    # Run model detection and generate the color splash effect
-    # Read image
-    image = skimage.io.imread(image_path)
-    # Detect objects
-    r = model.detect([image], verbose=1)[0]
-    # Color splash
-    splash = color_splash(image, r['masks'])
-    # Save output
-    # file_name = "splash_{:%Y%m%dT%H%M%S}.png".format(datetime.datetime.now())
-    # skimage.io.imsave(file_name, splash)
-    return splash
-
-
 ############################################################
 #  Training
 ############################################################
